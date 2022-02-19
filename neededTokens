@@ -1,0 +1,53 @@
+//Contains list of unimplemented tokens (I handled the other half of these already)
+
+    {      
+    }                        
+    >>     
+    --     
+    *      
+    !     
+    >=     
+
+    void       
+    true  
+    false  
+    struct
+    input  
+    disp    
+    else  
+    while  
+    return  
+
+//also need to handle the following cases:
+
+    Whitespace (They should all change the character count, but otherwise be ingnored unless in a string literal.)
+        Spaces, tabs and newlines are valid. 
+        
+
+    Comments (Recognize and ignore comments)
+        %
+        //*
+
+    Identifiers ((a sequence of one or more letters and/or digits and/or underscores, starting with a letter or underscore, excluding reserved words)
+        RegEx
+
+    Integer literals
+        RegEx
+
+    String literals
+        RegEx
+
+        Include:
+            an escaped character: a backslash followed by any one of the following six characters:
+                n
+                t
+                a single quote
+                a double quote
+                a question mark
+                another backslash
+            or
+            a single character (other than newline or double quote or backslash)
+
+    Illegal characters
+        Any character that is not whitespace and is not part of a token or comment is illegal.
+

@@ -1,35 +1,29 @@
-//Contains list of unimplemented tokens (I handled the other half of these already)
+//Contains list of unimplemented tokens (I handled the others already)
 
     {      
-    }                        
-    >>     
+    }                         
     --     
     *      
     !     
     >=     
-
-    void       
-    true  
-    false  
-    struct
+       
     input  
     disp    
-    else  
-    while  
-    return  
+    else   
+    
 
 //also need to handle the following cases:
 
-    Whitespace (They should all change the character count, but otherwise be ingnored unless in a string literal.)
+    (DONE) Whitespace (They should all change the character count, but otherwise be ingnored unless in a string literal.)
         Spaces, tabs and newlines are valid. 
         
 
-    Comments (Recognize and ignore comments)
-        %
-        //*
+    (In progress) Comments (Recognize and ignore comments)
+        %      (Regex proposed in minim.jlex)
+        //*    (Regex proposed in minim.jlex)
 
-    Identifiers ((a sequence of one or more letters and/or digits and/or underscores, starting with a letter or underscore, excluding reserved words)
-        RegEx
+    (In progress) Identifiers ((a sequence of one or more letters and/or digits and/or underscores, starting with a letter or underscore, excluding reserved words)
+        RegEx   (Regex propsed in minim.jlex)
 
     Integer literals
         RegEx
@@ -48,6 +42,6 @@
             or
             a single character (other than newline or double quote or backslash)
 
-    Illegal characters
+    (Done for us I think) Illegal characters
         Any character that is not whitespace and is not part of a token or comment is illegal.
 

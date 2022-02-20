@@ -89,150 +89,156 @@ return new Symbol(sym.EOF);
             return S;
           }
 
-"++" { //PLUSPLUS
+">>"      { TokenVal val  = new TokenVal(yyline+1, CharNum.num);
+            Symbol S = new Symbol(sym.READ, val);
+            CharNum.num += 2;
+            return S;
+        }
+
+"++" {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num);
             Symbol S = new Symbol(sym.PLUSPLUS, val);
-            CharNum.num++;
+            CharNum.num += 2;
             return S;
         }
 
-"/" { //DIVIDE
+"/" {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num);
             Symbol S = new Symbol(sym.DIVIDE, val);
-            CharNum.num++;
+            CharNum.num += 1;
             return S;
         }
 
-"==" { //EQUALS
+"==" {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num);
             Symbol S = new Symbol(sym.EQUALS, val);
-            CharNum.num++;
+            CharNum.num += 2;
             return S;
         }
 
-">" { //GREATER
+">" {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num);
-            Symbol S = new Symbol(sym.GREATER val);
-            CharNum.num++;
+            Symbol S = new Symbol(sym.GREATER, val);
+            CharNum.num += 1;
             return S;
         }
 
-"(" { //LPAREN
+"(" {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num);
             Symbol S = new Symbol(sym.LPAREN, val);
-            CharNum.num++;
+            CharNum.num += 1;
             return S;
         }
 
-"int" {  //INT
+"int" {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num);
             Symbol S = new Symbol(sym.INT, val);
-            CharNum.num++;
+            CharNum.num += 3;
             return S;
         }
 
-"<" {  //LESS
+"<" {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num);
             Symbol S = new Symbol(sym.LESS, val);
-            CharNum.num++;
+            CharNum.num += 1;
             return S;
         }
 
-"-" { //MINUS
+"-" {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num);
             Symbol S = new Symbol(sym.MINUS, val);
-            CharNum.num++;
+            CharNum.num += 1;
             return S;
         }
 
-"<<" { //WRITE == <<
+"<<" {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num);
             Symbol S = new Symbol(sym.WRITE, val);
-            CharNum.num++;
+            CharNum.num += 2;
             return S;
         }
 
-")" { //RPAREN
+")" {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num);
             Symbol S = new Symbol(sym.RPAREN, val);
-            CharNum.num++;
+            CharNum.num += 1;
             return S;
         }
 
-"!=" { //NOT
+"!=" {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num);
             Symbol S = new Symbol(sym.NOT, val);
-            CharNum.num++;
+            CharNum.num += 2;
             return S;
         }
 
-";" { //SEMICOLON
+";" {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num);
             Symbol S = new Symbol(sym.SEMICOLON, val);
-            CharNum.num++;
+            CharNum.num += 1;
             return S;
         }
 
-"&&" { //AND
+"&&" {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num);
             Symbol S = new Symbol(sym.AND, val);
-            CharNum.num++;
+            CharNum.num += 2;
             return S;
         }
 
-"||" { //OR
+"||" {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num);
             Symbol S = new Symbol(sym.OR, val);
-            CharNum.num++;
+            CharNum.num += 2;
             return S;
 }
 
-"bool" { //BOOL
+"bool" {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num);
-            Symbol S = new Symbol(sym.bool, val);
-            CharNum.num++;
+            Symbol S = new Symbol(sym.BOOL, val);
+            CharNum.num += 4;
             return S;
         }
 
-"," { //COMMA
+"," {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num);
             Symbol S = new Symbol(sym.COMMA, val);
-            CharNum.num++;
+            CharNum.num += 1;
             return S;
         }
 
-"+" { //PLUS //done already? 
+"+" {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num);
             Symbol S = new Symbol(sym.PLUS, val);
-            CharNum.num++;
+            CharNum.num += 1;
             return S;
         }
 
-"=" { //ASSIGN
+"=" {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num);
             Symbol S = new Symbol(sym.ASSIGN, val);
-            CharNum.num++;
+            CharNum.num += 1;
             return S;
         }
 
-"<=" { //LESSEQ
+"<=" {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num);
             Symbol S = new Symbol(sym.LESSEQ, val);
-            CharNum.num++;
+            CharNum.num += 2;
             return S;
         }
 
-"if" { //IF
+"if" {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num); 
             Symbol S = new Symbol(sym.IF, val);
-            CharNum.num++;
+            CharNum.num += 2;
             return S;
         }
 
-"." { //DOT
+"." {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num); 
             Symbol S = new Symbol(sym.DOT, val);
-            CharNum.num++;
+            CharNum.num += 1;
             return S;
         }
         
@@ -240,3 +246,63 @@ return new Symbol(sym.EOF);
                          "ignoring illegal character: " + yytext());
             CharNum.num++;
           }
+
+"while"    { 
+          TokenVal val  = new TokenVal(yyline+1, CharNum.num);
+          Symbol S = new Symbol(sym.WHILE, val);
+          CharNum.num += 5;
+          return S;
+        }
+
+"return" {
+          TokenVal val = new TokenVal(yyline+1, CharNum.num);
+          Symbol S = new Symbol(sym.RETURN, val);
+          CharNum += 6;
+          return S;
+ }
+
+ "void" {
+          TokenVal val = new TokenVal(yyline+1, CharNum.num);
+          Symbol S = new Symbol(sym.VOID, val);
+          CharNum += 4;
+          return S;
+ }
+
+"true" {
+          TokenVal val = new TokenVal(yyline+1, CharNum.num);
+          Symbol S = new Symbol(sym.TRUE, val);
+          CharNum += 4;
+          return S;
+}
+
+"false" {
+          TokenVal val = new TokenVal(yyline+1, CharNum.num);
+          Symbol S = new Symbol(sym.FALSE, val);
+          CharNum += 5
+          return S;
+}
+
+"struct" {
+          TokenVal val = new TokenVal(yyline+1, CharNum.num);
+          Symbol S = new Symbol(sym.STRUCT, val);
+          CharNum += 6
+          return S;
+}
+
+
+(%)(DIGIT|WHITESPACE)*[\n] {  //PROPOSED - #TODO - First type of comment
+  
+
+
+}
+
+(//*)(DIGIT|WHITESPACE)*[\n] { //PROPOSED - #TODO - second type of comment
+
+
+
+}
+
+#TODO   { //PROPOSED = #TODO - Identifier RegEx
+
+
+}

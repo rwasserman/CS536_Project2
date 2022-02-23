@@ -235,6 +235,12 @@ return new Symbol(sym.EOF);
             return S;
         }
 
+"else" {
+            Symbol S = new Symbol(sym.ELSE, new TokenVal(yyline+1, CharNum.num));
+            CharNum.num += 4;
+            return S;
+}
+
 "." {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num); 
             Symbol S = new Symbol(sym.DOT, val);
@@ -253,6 +259,18 @@ return new Symbol(sym.EOF);
           CharNum.num += 5;
           return S;
         }
+
+"input" {
+          Symbol S = new Symbol(sym.INPUT, new TokenVal(yyline+1, CharNum.num));
+          CharNum.num += 3;
+          return S;
+}
+
+"display" {
+          Symbol S = new Symbol(sym.DISPLAY, new TokenVal(yyline+1, CharNum.num));
+          CharNum.num += 4;
+          return S;
+}
 
 "return" {
           TokenVal val = new TokenVal(yyline+1, CharNum.num);
@@ -288,6 +306,44 @@ return new Symbol(sym.EOF);
           CharNum += 6
           return S;
 }
+
+"{" {
+  Symbol S = new Symbol(sym.LCURLY, new TokenVal(yyline+1, CharNum.num));
+  CharNum.num += 1;
+  return S;
+}
+
+"}" {
+  Symbol S = new Symbol(sym.RCURLY, new TokenVal(yyline+1, CharNum.num));
+  CharNum.num += 1;
+  return S;
+}
+
+"--" {
+  Symbol S = new Symbol(sym.MINUSMINUS, new TokenVal(yyline+1, CharNum.num));
+  CharNum.num += 2;
+  return S;
+}
+
+"*" {
+  Symbol S = new Symbol(sym.TIMES, new TokenVal(yyline+1, CharNum.num));
+  CharNum.num += 1;
+  return S;
+}
+
+"!" {
+  Symbol S = new Symbol(sym.NOT, new TokenVal(yyline+1, CharNum.num));
+  CharNum.num += 1;
+  return S;
+}
+
+">=" {
+  Symbol S = new Symbol(sym.GREATEREQ, new TokenVal(yyline+1, CharNum.num));
+  CharNum.num += 2;
+  return S;
+}
+
+
 
 
 (%)(DIGIT|WHITESPACE)*[\n] {  //PROPOSED - #TODO - First type of comment

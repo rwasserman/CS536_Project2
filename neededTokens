@@ -1,15 +1,15 @@
 //Contains list of unimplemented tokens (I handled the others already)
 
-    {      
-    }                         
-    --     
-    *      
-    !     
-    >=     
+        {      (done)
+        }      (done)                 
+        --     (done)
+        *      (done)
+        !      (done)
+        >=     (done)
        
-    input  
-    disp    
-    else   
+        input  (done)
+        disp   (done)
+        else   (done)
     
 
 //also need to handle the following cases:

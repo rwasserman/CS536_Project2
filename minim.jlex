@@ -257,52 +257,52 @@ return new Symbol(sym.EOF);
 "return" {
           TokenVal val = new TokenVal(yyline+1, CharNum.num);
           Symbol S = new Symbol(sym.RETURN, val);
-          CharNum += 6;
+          CharNum.num += 6;
           return S;
  }
 
  "void" {
           TokenVal val = new TokenVal(yyline+1, CharNum.num);
           Symbol S = new Symbol(sym.VOID, val);
-          CharNum += 4;
+          CharNum.num += 4;
           return S;
  }
 
 "true" {
           TokenVal val = new TokenVal(yyline+1, CharNum.num);
           Symbol S = new Symbol(sym.TRUE, val);
-          CharNum += 4;
+          CharNum.num += 4;
           return S;
 }
 
 "false" {
           TokenVal val = new TokenVal(yyline+1, CharNum.num);
           Symbol S = new Symbol(sym.FALSE, val);
-          CharNum += 5
+          CharNum.num += 5;
           return S;
 }
 
 "struct" {
           TokenVal val = new TokenVal(yyline+1, CharNum.num);
           Symbol S = new Symbol(sym.STRUCT, val);
-          CharNum += 6
+          CharNum.num += 6;
           return S;
 }
 
 
-(%)(DIGIT|WHITESPACE)*[\n] {  //PROPOSED - #TODO - First type of comment
+{(%}) {  
   
-
-
-}
-
-(//*)(DIGIT|WHITESPACE)*[\n] { //PROPOSED - #TODO - second type of comment
-
-
+  CharNum.num = 1;
 
 }
 
-#TODO   { //PROPOSED = #TODO - Identifier RegEx
+(//*)(DIGIT|WHITESPACE)*[\n] { 
+
+  CharNum.num = 1;
+
+}
+
+#TODO   { //Identifier RegEx
 
 
 }

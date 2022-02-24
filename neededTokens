@@ -1,35 +1,24 @@
-//Contains list of unimplemented tokens (I handled the others already)
-
-        {      (done)
-        }      (done)                 
-        --     (done)
-        *      (done)
-        !      (done)
-        >=     (done)
-       
-        input  (done)
-        disp   (done)
-        else   (done)
-    
-
 //also need to handle the following cases:
 
     (DONE) Whitespace (They should all change the character count, but otherwise be ingnored unless in a string literal.)
         Spaces, tabs and newlines are valid. 
         
 
-    (In progress) Comments (Recognize and ignore comments)
+    (DONE) Comments (Recognize and ignore comments)
         %      (Regex proposed in minim.jlex)
         //*    (Regex proposed in minim.jlex)
 
-    (In progress) Identifiers ((a sequence of one or more letters and/or digits and/or underscores, starting with a letter or underscore, excluding reserved words)
+    (DONE) Identifiers ((a sequence of one or more letters and/or digits and/or underscores, starting with a letter or underscore, excluding reserved words)
         RegEx   (Regex propsed in minim.jlex)
 
     Integer literals
         RegEx
+        (DONE) Check for bad integer literals (I think I did this in the {DIGIT} function.)
 
     String literals
         RegEx
+        Check for unterminated string literals 
+        Check for bad string literals
 
         Include:
             an escaped character: a backslash followed by any one of the following six characters:
@@ -42,6 +31,6 @@
             or
             a single character (other than newline or double quote or backslash)
 
-    (Done for us I think) Illegal characters
+    (DONE for us I think) Illegal characters
         Any character that is not whitespace and is not part of a token or comment is illegal.
 

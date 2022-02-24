@@ -2,3 +2,13 @@
 +
 a
 %87236482376
+%%%%%
+% asdjfn
+% this should be a comment that should not appear in the output. 782782
+//* this is also a comment that should not appear in the output. 123123
+//* //* //* %%%% 123123
+%%% comment here
+thisIsAnID222
+_thisisanID
+thisSHOULDBEAnID
+123Thisis_NOT_an_ID

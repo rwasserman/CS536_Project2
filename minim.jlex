@@ -58,6 +58,8 @@ class CharNum {
 
 DIGIT=        [0-9]
 WHITESPACE=   [\040\t]
+LETTERS =     [a-zA-Z]
+UNDERSCORE =  [_]
 
 %implements java_cup.runtime.Scanner
 %function next_token
@@ -71,29 +73,51 @@ return new Symbol(sym.EOF);
 
 %%
 
-{DIGIT}+  { // NOTE: the following computation of the integer value does
-            //       NOT check for overflow. This must be changed.
+{DIGIT}+  { 
+            //UPDATED - Please review to make sure it makes sense to you. 
+            //Checks for Bad integer literals (if larger than MAX_VALUE)
+
+            int MAX_VALUE = Integer.MAX_VALUE;
             int val = Integer.parseInt(yytext());
-            Symbol S = new Symbol(sym.INTLITERAL,
-                             new IntLitTokenVal(yyline+1, CharNum.num, val));
+
+            if (val > MAX_VALUE) {
+              int lineNum = yyline + 1;
+              
+              String msg = "integer literal too large; using max value";
+
+              ErrMsg.warn(lineNum, CharNum.num, msg);
+              val = MAX_VALUE;
+            }
+          
+            Symbol S = new Symbol(sym.INTLITERAL, new IntLitTokenVal(yyline+1, CharNum.num, val));
             CharNum.num += yytext().length();
             return S;
           }
 
-\n        { CharNum.num = 1; }
+\n          { 
+            CharNum.num = 1; 
+            }
 
-{WHITESPACE}+  { CharNum.num += yytext().length(); }
+{WHITESPACE}+  { 
+                CharNum.num += yytext().length(); 
+                }
 
-"+"       { Symbol S = new Symbol(sym.PLUS, new TokenVal(yyline+1, CharNum.num));
+{LETTERS}+ {
+            CharNum.num += yytext().length();
+            }
+
+"+"       { 
+            Symbol S = new Symbol(sym.PLUS, new TokenVal(yyline+1, CharNum.num));
             CharNum.num++;
             return S;
           }
 
-">>"      { TokenVal val  = new TokenVal(yyline+1, CharNum.num);
+">>"      { 
+            TokenVal val  = new TokenVal(yyline+1, CharNum.num);
             Symbol S = new Symbol(sym.READ, val);
             CharNum.num += 2;
             return S;
-        }
+          }
 
 "++" {
             TokenVal val  = new TokenVal(yyline+1, CharNum.num);
@@ -248,8 +272,7 @@ return new Symbol(sym.EOF);
             return S;
         }
         
-.         { ErrMsg.fatal(yyline+1, CharNum.num,
-                         "ignoring illegal character: " + yytext());
+.         { ErrMsg.fatal(yyline+1, CharNum.num, "ignoring illegal character: " + yytext());
             CharNum.num++;
           }
 
@@ -266,8 +289,8 @@ return new Symbol(sym.EOF);
           return S;
 }
 
-"display" {
-          Symbol S = new Symbol(sym.DISPLAY, new TokenVal(yyline+1, CharNum.num));
+"disp" {
+          Symbol S = new Symbol(sym.DISP, new TokenVal(yyline+1, CharNum.num));
           CharNum.num += 4;
           return S;
 }
@@ -343,22 +366,22 @@ return new Symbol(sym.EOF);
   return S;
 }
 
-
-
-
-{(%}) {  
-  
+(%)(.*)(\n) {  
   CharNum.num = 1;
-
 }
 
-(//*)(DIGIT|WHITESPACE)*[\n] { 
-
+("//*")(.*)(\n) { 
   CharNum.num = 1;
+}
+
+({LETTERS}|{UNDERSCORE})({LETTERS}|{UNDERSCORE}|{DIGIT})* {
+
+  String idVal = yytext();
+  IdTokenVal val = new IdTokenVal(yyline+1, CharNum.num, idVal);
+
+  Symbol S = new Symbol(sym.ID, val);
+  CharNum.num += yytext().length();
+  return S;
 
 }
 
-#TODO   { //Identifier RegEx
-
-
-}

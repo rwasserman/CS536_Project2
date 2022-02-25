@@ -60,6 +60,14 @@ DIGIT=        [0-9]
 WHITESPACE=   [\040\t]
 LETTERS =     [a-zA-Z]
 UNDERSCORE =  [_]
+QUOTE = [\"]
+NOTQUOTE = [^\"]
+BACKSLASH = [\\]
+ESCAPECHAR = [nt'\"\?\\]
+NOTESCAPECHAR = [^nt'\"\?\\]
+SINGLECHAR = [^\n\"\\]
+SLASH = [/]
+SHARP = [#]
 
 %implements java_cup.runtime.Scanner
 %function next_token
@@ -73,26 +81,19 @@ return new Symbol(sym.EOF);
 
 %%
 
-{DIGIT}+  { 
-            //UPDATED - Please review to make sure it makes sense to you. 
-            //Checks for Bad integer literals (if larger than MAX_VALUE)
-
-            int MAX_VALUE = Integer.MAX_VALUE;
-            int val = Integer.parseInt(yytext());
-
-            if (val > MAX_VALUE) {
-              int lineNum = yyline + 1;
-              
-              String msg = "integer literal too large; using max value";
-
-              ErrMsg.warn(lineNum, CharNum.num, msg);
-              val = MAX_VALUE;
-            }
-          
-            Symbol S = new Symbol(sym.INTLITERAL, new IntLitTokenVal(yyline+1, CharNum.num, val));
-            CharNum.num += yytext().length();
-            return S;
-          }
+{DIGIT}+ { 
+    int val = 0;
+    try {
+        val = (new Integer(yytext())).intValue();
+    } catch (Exception e) {
+        val = Integer.MAX_VALUE;
+        ErrMsg.warn(yyline + 1, CharNum.num, "integer literal too large; using max value");
+    } finally {
+        Symbol S = new Symbol(sym.INTLITERAL, new IntLitTokenVal(yyline + 1, CharNum.num, val));
+        CharNum.num += yytext().length();
+        return S;
+    }
+}
 
 \n          { 
             CharNum.num = 1; 
@@ -105,6 +106,27 @@ return new Symbol(sym.EOF);
 {LETTERS}+ {
             CharNum.num += yytext().length();
             }
+
+{QUOTE}(({SINGLECHAR})*{BACKSLASH}{ESCAPECHAR})*({SINGLECHAR})*{QUOTE} {
+    Symbol S = new Symbol(sym.STRINGLITERAL, new StrLitTokenVal(yyline + 1, CharNum.num, yytext()));
+    CharNum.num += yytext().length();
+    return S;
+}
+
+{QUOTE}(({SINGLECHAR})*{BACKSLASH}{NOTESCAPECHAR})+({SINGLECHAR})* {
+    ErrMsg.fatal(yyline + 1, CharNum.num, "unterminated string literal with bad escaped character ignored");
+    CharNum.num = 1;
+}
+
+{QUOTE}(({SINGLECHAR})*{BACKSLASH}{ESCAPECHAR})*({SINGLECHAR})* {
+    ErrMsg.fatal(yyline + 1, CharNum.num, "unterminated string literal ignored");
+    CharNum.num = 1;
+}
+
+{QUOTE}(({SINGLECHAR})*{BACKSLASH}{NOTESCAPECHAR})+({SINGLECHAR})*{QUOTE} {
+    ErrMsg.fatal(yyline + 1, CharNum.num, "string literal with bad escaped character ignored");
+    CharNum.num = 1;
+}
 
 "+"       { 
             Symbol S = new Symbol(sym.PLUS, new TokenVal(yyline+1, CharNum.num));

@@ -15,29 +15,31 @@ public class P2 {
         // test all tokens - general test function.
         testAllTokens();
         CharNum.num = 1;
-    
-        // ADD CALLS TO OTHER TEST METHODS HERE
 
-
-        //tests comment tokens for %
+        //tests comment tokens for % - Includes edge cases
         testCommentTokensType1();
+        CharNum.num = 1;
 
-        //tests comment tokens for //*
+        //tests comment tokens for //* - Includes edge cases
         testCommentTokensType2();
+        CharNum.num = 1;
 
-        //tests some reserved word tokens
+        //tests ALL reserved word tokens
         testReservedWordTokens1();
+        CharNum.num = 1;
 
-        //tests some operator tokens, including as _____________
+        //tests some operator tokens, including as ++, ,, == , (, ), {, }, <<, >>, ;, and compound statements such as (9 + 8) - 2. 
         testOperatorTokens1();
+        CharNum.num = 1;
     }
 
     /*
+    * Tests use of the comment %. Includes edge cases.
     *
-    *
-    *
+    * @throws IOException if there is an issue creating Yylex scanner = Yylex(infile).
+    * @returns void.
     */
-    private static void testCommentTokensType1() {
+    private static void testCommentTokensType1() throws IOException{
 
         String testName = "testCommentTokensType1";
 
@@ -192,14 +194,20 @@ public class P2 {
             token = scanner.next_token();
         } // end while
         outFile.close();
+
+        
+
+
     }
     
     /*
+    * Tests the use of the second type of token, //*. 
+    * Includes tests for general use and edge cases. 
     *
-    *
-    *
+    * @throws IOException if there is an issue creating Yylex scanner = Yylex(infile).
+    * @returns void.
     */
-    private static void testCommentTokensType2() {
+    private static void testCommentTokensType2() throws IOException{
 
         String testName = "testCommentTokensType2";
 
@@ -359,11 +367,13 @@ public class P2 {
     }
 
     /*
+    * Tests ALL reserved word tokens. Includes edge cases and compound statement, along 
+    * with general use tests. 
     *
-    *
-    *
+    * @throws IOException if there is an issue creating Yylex scanner = Yylex(infile).
+    * @returns void.
     */
-    private static void testReservedWordTokens1() {
+    private static void testReservedWordTokens1() throws IOException{
 
         String testName = "testReservedWordTokens1";
 
@@ -522,11 +532,13 @@ public class P2 {
     }
 
     /*
+    * Tests operators, such as ++, ,, == , (, ), {, }, <<, >>, ;, and compound complex compound
+    * functions. Includes easier tests as well. Includes edge case tests.  
     *
-    *
-    *
+    * @throws IOException if there is an issue creating Yylex scanner = Yylex(infile).
+    * @returns void.
     */
-    private static void testOperatorTokens1() {
+    private static void testOperatorTokens1() throws IOException{
 
         String testName = "testOperatorTokens1";
 
@@ -535,6 +547,7 @@ public class P2 {
         PrintWriter outFile = null;
         String testNameIn = testName.concat(".in");
         String testNameOut = testName.concat(".out");
+        System.out.println(testNameOut);
         String notFound = "File ".concat(testNameIn).concat(" not found.");
         String cannotOpen = testNameOut.concat(" cannot be opened.");
 

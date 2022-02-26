@@ -1,0 +1,20 @@
+%this is the first type of comment.
+% Test stringLiterals first:
+% this_IS_a_comment_123
+%now we test reserved words mixed with comments:
+% void 
+% int 
+%void
+%int
+% Now we test operators with comments:
+%123123
+% 999 999 999 % 999 999 %
+%______________
+% Tests edge cases:
+%%%%%%%%%%%%%%%
+% % % % string here % % % %
+% \n
+% //* this is still a comment, though it uses both types. 
+% Test Blank:
+%
+% IN SUMMARY, THE ENTIRE OUTPUT FOR THIS FILE SHOULD BE BLANK TO PASS

@@ -38,6 +38,10 @@ ErrMsg.class: ErrMsg.java
 test:
 	java -cp $(CP) P2 
 	diff allTokens.in allTokens.out
+	diff testCommentTokensType1.in testCommentTokensType1.out
+	diff testCommentTokensType2.in testCommentTokensType2.out
+	diff testReservedWordTokens1.in testReservedWordTokens1.out
+	diff testOperatorTokens1.in testOperatorTokens1.out
 
 ###
 # clean up
@@ -48,3 +52,7 @@ clean:
 
 cleantest:
 	rm -f allTokens.out
+	rm -f testCommentTokensType1.out
+	rm -f testCommentTokensType2.out
+	rm -f testReservedWordTokens1.out
+	rm -f testOperatorTokens1.out

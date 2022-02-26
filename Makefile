@@ -42,6 +42,8 @@ test:
 	diff testCommentTokensType2.in testCommentTokensType2.out
 	diff testReservedWordTokens1.in testReservedWordTokens1.out
 	diff testOperatorTokens1.in testOperatorTokens1.out
+	diff testIntLitTokens.in testIntLitTokens.out
+	diff testStrLitTokens.in testStrLitTokens.out
 
 ###
 # clean up
@@ -56,3 +58,5 @@ cleantest:
 	rm -f testCommentTokensType2.out
 	rm -f testReservedWordTokens1.out
 	rm -f testOperatorTokens1.out
+	rm -f testIntLitTokens.out
+	rm -f testStrLitTokens.out

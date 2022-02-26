@@ -1,6 +1,6 @@
 { (int = 2) } //* ?
 (
-) //* THIS SHOULD NOT BE SEEN IN .out FILE
+) //* THIS COMMENT SHOULD NOT BE SEEN IN .out FILE
 ;
 ,  //* ?
 .

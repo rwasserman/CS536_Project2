@@ -13,6 +13,7 @@ public class P2 {
                                            // exception may be thrown by yylex
         
         // test all tokens - general test function.
+        // also test illegal characters
         testAllTokens();
         CharNum.num = 1;
 
@@ -33,6 +34,7 @@ public class P2 {
         CharNum.num = 1;
 
         //tests the integer literal tokens, including 0-9
+        // also tests overflow
         testIntLitTokens();
         CharNum.num = 1;
 
@@ -48,7 +50,7 @@ public class P2 {
     * @throws IOException if there is an issue creating Yylex scanner = Yylex(infile).
     * @returns void.
     */
-    private static void testStrLitTokens() throws IOException{
+    private static void testStrLitTokens() throws IOException {
 
         String testName = "testStrLitTokens";
 
@@ -211,7 +213,7 @@ public class P2 {
     * @throws IOException if there is an issue creating Yylex scanner = Yylex(infile).
     * @returns void.
     */
-    private static void testIntLitTokens() throws IOException{
+    private static void testIntLitTokens() throws IOException {
 
         String testName = "testIntLitTokens";
 
@@ -374,7 +376,7 @@ public class P2 {
     * @throws IOException if there is an issue creating Yylex scanner = Yylex(infile).
     * @returns void.
     */
-    private static void testCommentTokensType1() throws IOException{
+    private static void testCommentTokensType1() throws IOException {
 
         String testName = "testCommentTokensType1";
 
@@ -538,7 +540,7 @@ public class P2 {
     * @throws IOException if there is an issue creating Yylex scanner = Yylex(infile).
     * @returns void.
     */
-    private static void testCommentTokensType2() throws IOException{
+    private static void testCommentTokensType2() throws IOException {
 
         String testName = "testCommentTokensType2";
 
@@ -704,7 +706,7 @@ public class P2 {
     * @throws IOException if there is an issue creating Yylex scanner = Yylex(infile).
     * @returns void.
     */
-    private static void testReservedWordTokens1() throws IOException{
+    private static void testReservedWordTokens1() throws IOException {
 
         String testName = "testReservedWordTokens1";
 
@@ -869,7 +871,7 @@ public class P2 {
     * @throws IOException if there is an issue creating Yylex scanner = Yylex(infile).
     * @returns void.
     */
-    private static void testOperatorTokens1() throws IOException{
+    private static void testOperatorTokens1() throws IOException {
 
         String testName = "testOperatorTokens1";
 
